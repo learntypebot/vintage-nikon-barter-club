@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Vintage Nikon Barter Club — Trade Classic Nikon Cameras</title>
+<meta name="description" content="A barter trade club for vintage Nikon enthusiasts. Trade 1970s and 1980s Nikon film cameras — F2, F3, FM2 and more — collector to collector.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="hero">
+  <img class="hero-img" src="https://res.cloudinary.com/xjkdkzxz/image/upload/f_auto,q_auto,w_1600/v1795238657/vintage-nikon-club/vintage-nikon-club/nikon-f3.webp" alt="Nikon F3 vintage film camera with Nikkor 50mm lens">
+  <div class="hero-text">
+    <p class="kicker">For vintage Nikon enthusiasts only</p>
+    <h1>The Vintage Nikon Barter Club</h1>
+    <p class="sub">Trade old cameras, collector to collector. No auctions, no dealers — just Nikon lovers swapping the classics of the 1970s and 1980s.</p>
+    <a class="btn" href="#join">Join the club</a>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <h2>How the barter trade works</h2>
+    <div class="steps">
+      <div class="step"><h3>1. Tell us what you have</h3><p>Fill in the form below with the Nikon bodies and lenses in your collection, and what you are hoping to trade for.</p></div>
+      <div class="step"><h3>2. We match collectors</h3><p>We connect members whose wish lists line up — an F2 looking for a new home meets an FM2 owner ready to swap.</p></div>
+      <div class="step"><h3>3. Trade, collector to collector</h3><p>You agree the swap directly with the other collector. Honest condition notes, plenty of photos, no middlemen.</p></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <h2>The classics we trade</h2>
+    <div class="cards">
+      <article class="card">
+        <img src="https://res.cloudinary.com/xjkdkzxz/image/upload/f_auto,q_auto,w_900/v1795238662/vintage-nikon-club/nikon-f2.jpg" alt="Nikon F2 film camera from the 1970s">
+        <h3>Nikon F2 · 1971</h3>
+        <p>The fully mechanical professional flagship of the seventies. Built like a tank, loved by photojournalists everywhere.</p>
+      </article>
+      <article class="card">
+        <img src="https://res.cloudinary.com/xjkdkzxz/image/upload/f_auto,q_auto,w_900/v1795238657/vintage-nikon-club/vintage-nikon-club/nikon-f3.webp" alt="Nikon F3 film camera from 1980">
+        <h3>Nikon F3 · 1980</h3>
+        <p>Giorgetto Giugiaro's design icon and NASA's camera of choice. The eighties pro body that refused to retire.</p>
+      </article>
+      <article class="card">
+        <img src="https://res.cloudinary.com/xjkdkzxz/image/upload/f_auto,q_auto,w_900/v1795238664/vintage-nikon-club/nikon-fm2.webp" alt="Nikon FM2 film camera from the 1980s">
+        <h3>Nikon FM2 · 1982</h3>
+        <p>The mechanical all-rounder with a 1/4000s shutter and 1/250s flash sync. The enthusiast favourite that never quits.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="join">
+    <h2>Interested? Leave your details</h2>
+    <p class="lead">Tell us a little about your collection and what you would love to trade for. We will contact you when a match comes up.</p>
+    <form id="form" class="join-form">
+      <label>Your name
+        <input type="text" name="name" required>
+      </label>
+      <label>Your email
+        <input type="email" name="email" required>
+      </label>
+      <label>Your message
+        <textarea name="message" rows="5" required placeholder="e.g. I have a Nikon F2 in good working order and I am looking for an FM2 or F3 body..."></textarea>
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <p>The Vintage Nikon Barter Club — a small circle of collectors trading 1970s–1980s Nikon film cameras.</p>
+</footer>
+
+<script>
+const form = document.getElementById('form');
+const submitBtn = form.querySelector('button[type="submit"]');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    formData.append("access_key", "699a068d-983c-4346-b865-3720e3ed9ff3");
+
+    const originalText = submitBtn.textContent;
+
+    submitBtn.textContent = "Sending...";
+    submitBtn.disabled = true;
+
+    try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("Success! Your message has been sent.");
+            form.reset();
+        } else {
+            alert("Error: " + data.message);
+        }
+
+    } catch (error) {
+        alert("Something went wrong. Please try again.");
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
+});
+</script>
+</body>
+</html>
